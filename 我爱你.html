@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我爱你 - 特别的心意</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            color: #d32f2f;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+            padding: 30px 20px;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: pulse 2s infinite;
+        }
+        
+        .heart {
+            font-size: 6rem;
+            margin: 20px 0;
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .heart:hover {
+            transform: scale(1.2);
+        }
+        
+        .message {
+            font-size: 1.6rem;
+            line-height: 1.7;
+            margin: 25px 0;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .love-letter {
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            display: none;
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .love-letter p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        button {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            font-size: 1.3rem;
+            border-radius: 30px;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            background: #c2185b;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            font-size: 1.8rem;
+            opacity: 0.7;
+            animation: float 8s linear infinite;
+        }
+        
+        .signature {
+            margin-top: 20px;
+            font-style: italic;
+            font-size: 1.3rem;
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background: #f8bbd0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .heart {
+                font-size: 5rem;
+            }
+            
+            .message {
+                font-size: 1.4rem;
+                padding: 20px;
+            }
+            
+            .photo-frame {
+                width: 150px;
+                height: 150px;
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .heart {
+                font-size: 4rem;
+            }
+            
+            .message {
+                font-size: 1.2rem;
+            }
+            
+            button {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <div class="container">
+        <h1>我爱你 ❤️</h1>
+        
+        <div class="photo-frame">
+            ❤️
+        </div>
+        
+        <div class="heart" id="mainHeart">❤️</div>
+        
+        <div class="message">
+            遇见你是我此生最美的意外，<br>
+            你的笑容让我的世界充满阳光。
+        </div>
+        
+        <button id="showLetter">💌 打开我的心意</button>
+        
+        <div class="love-letter" id="loveLetter">
+            <p>亲爱的你：</p>
+            <p>从遇见你的那一刻起，我的生活就变得不同。你的笑容如阳光般温暖，你的声音如音乐般动听。</p>
+            <p>每一天，我都感谢命运让我们相遇。无论是你的优点还是小缺点，在我眼中都是那么可爱。</p>
+            <p>我想和你一起看日出日落，一起走过春夏秋冬，一起分享生活中的点点滴滴。</p>
+            <p>你愿意让我成为你生命中的一部分吗？</p>
+            <p class="signature">永远爱你的我 ❤️</p>
+        </div>
+        
+        <div class="message" id="interactiveMessage" style="display: none;">
+            <p>谢谢你打开我的心意！</p>
+            <p>希望我的真心能够传达到你的心里 ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        // 创建漂浮的心形
+        function createFloatingHearts() {
+            const floatingHearts = document.getElementById('floatingHearts');
+            const heartCount = 25;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 10 + 's';
+                heart.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+                heart.style.opacity = Math.random() * 0.5 + 0.3;
+                floatingHearts.appendChild(heart);
+            }
+        }
+        
+        // 显示情书
+        document.getElementById('showLetter').addEventListener('click', function() {
+            const letter = document.getElementById('loveLetter');
+            const button = document.getElementById('showLetter');
+            const interactiveMsg = document.getElementById('interactiveMessage');
+            
+            if (letter.style.display === 'block') {
+                letter.style.display = 'none';
+                interactiveMsg.style.display = 'none';
+                button.textContent = '💌 打开我的心意';
+            } else {
+                letter.style.display = 'block';
+                interactiveMsg.style.display = 'block';
+                button.textContent = '💖 收起情书';
+                
+                // 添加一些心形动画
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.classList.add('floating-heart');
+                        heart.innerHTML = '❤️';
+                        heart.style.left = Math.random() * 100 + 'vw';
+                        heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                        heart.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+                        document.getElementById('floatingHearts').appendChild(heart);
+                        
+                        // 动画结束后移除心形
+                        setTimeout(() => {
+                            if (heart.parentNode) {
+                                heart.parentNode.removeChild(heart);
+                            }
+                        }, 5000);
+                    }, i * 200);
+                }
+            }
+        });
+        
+        // 点击大心形也有效果
+        document.getElementById('mainHeart').addEventListener('click', function() {
+            this.style.transform = 'scale(1.3)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 300);
+            
+            // 创建点击心形效果
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('floating-heart');
+                    heart.innerHTML = '❤️';
+                    heart.style.left = '50%';
+                    heart.style.animationDuration = '2s';
+                    heart.style.fontSize = '2rem';
+                    document.getElementById('floatingHearts').appendChild(heart);
+                    
+                    setTimeout(() => {
+                        if (heart.parentNode) {
+                            heart.parentNode.removeChild(heart);
+                        }
+                    }, 2000);
+                }, i * 100);
+            }
+        });
+        
+        // 页面加载完成后初始化
+        window.onload = function() {
+            createFloatingHearts();
+            
+            // 添加一些初始动画
+            setTimeout(() => {
+                document.querySelector('.container').style.opacity = 1;
+                document.querySelector('.container').style.transform = 'translateY(0)';
+            }, 100);
+        };
+        
+        // 初始样式
+        document.querySelector('.container').style.opacity = 0;
+        document.querySelector('.container').style.transform = 'translateY(20px)';
+        document.querySelector('.container').style.transition = 'opacity 0.5s, transform 0.5s';
+    </script>
+</body>
+</html>
